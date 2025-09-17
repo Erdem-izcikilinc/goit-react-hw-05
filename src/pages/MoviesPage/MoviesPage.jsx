@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import MovieList from "../../components/MovieList/MovieList.jsx";
+import { searchMovies } from "../../services/Api";
+import MovieList from "../../components/MovieList/MovieList";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query") ?? "";
+  const query = searchParams.get("query") || "";
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const value = e.target.elements.search.value;
     setSearchParams({ query: value });
@@ -15,8 +16,14 @@ export default function MoviesPage() {
 
   useEffect(() => {
     if (!query) return;
-    // Burada TMDB search API çağrısı olacak
-    setMovies([]);
+    (async () => {
+      try {
+        const results = await searchMovies(query);
+        setMovies(results);
+      } catch (err) {
+        console.error("Film arama hatası:", err);
+      }
+    })();
   }, [query]);
 
   return (
@@ -26,7 +33,7 @@ export default function MoviesPage() {
         <input type="text" name="search" defaultValue={query} />
         <button type="submit">Search</button>
       </form>
-      {movies.length > 0 && <MovieList movies={movies} />}
+      {movies.length > 0 ? <MovieList movies={movies} /> : <p>No results</p>}
     </div>
   );
 }

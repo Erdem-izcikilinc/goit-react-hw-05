@@ -1,0 +1,59 @@
+.topSection {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .poster {
+    width: 250px;
+    border-radius: 8px;
+  }
+  
+  .details {
+    flex: 1;
+  }
+  
+  .details h2 {
+    margin: 0 0 10px 0;
+  }
+  
+  .details p {
+    margin: 5px 0;
+  }
+  
+  .genres {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .genres li {
+    background-color: #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .buttons {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .castList, .reviewsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .castList li {
+    margin-bottom: 10px;
+  }
+  
+  .castList img {
+    width: 100px;
+    border-radius: 6px;
+    margin-right: 10px;
+  }
+  
